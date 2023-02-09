@@ -1,5 +1,3 @@
-# SEsp23
-
 Team Project for SE class in Sp23
 
 Team: 
