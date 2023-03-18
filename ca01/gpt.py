@@ -31,11 +31,11 @@ class GPT():
         # Set up the model and prompt
         self.model_engine = "text-davinci-003"
 
-    def getResponse(self,prompt):
-        ''' Generate a GPT response '''
+    def compare(self,prompt):
+        '''Compare two number'''
         completion = openai.Completion.create(
             engine=self.model_engine,
-            prompt=prompt,
+            prompt = prompt,
             max_tokens=1024,
             n=1,
             stop=None,
@@ -45,7 +45,8 @@ class GPT():
         response = completion.choices[0].text
         return response
 
+
 if __name__=='__main__':
     import os
     g = GPT(os.environ.get("APIKEY"))
-    print(g.getResponse("what does openai's GPT stand for?"))
+    print(g.compare('which number is greater? 10000 or 1000? '))

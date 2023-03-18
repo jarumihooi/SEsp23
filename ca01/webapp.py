@@ -10,7 +10,7 @@ On Mac
 % pip3 install openai
 % pip3 install flask
 % export APIKEY="......."  # in bash
-% python3 gptwebapp.py
+% python3 webapp.py
 
 On Windows:
 % pip install openai
