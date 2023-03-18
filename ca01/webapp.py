@@ -19,7 +19,7 @@ On Windows:
 % python gptwebapp.py
 '''
 from flask import request,redirect,url_for,Flask
-from ca01.gpt import GPT
+from gpt import GPT
 import os
 
 app = Flask(__name__)
@@ -32,33 +32,39 @@ gptAPI = GPT(os.environ.get('APIKEY'))
 def index():
     ''' display links to each team member's page '''
     print('processing / route')
-    return f'''
-        <h1>GPT Demo</h1>
-        <a href="/gptdemo">Ask questions to GPT</a>
-    '''
+    return '''
+      <h1>Following links are our team members' links</h1>
+      <ul type="circle">
+        <li><a href = "https://github.com/jarumihooi">Jeremy Huey</a></li>
+        <li><a href = "https://github.com/ctighebrandeis">Chris Tighe</a></li>
+        <li><a href = "https://github.com/i-bog?tab=repositories">Ijeoma Ogbogu</a></li>
+        <li><a href = "https://github.com/mengliyang2023">Mengli Yang</a></li>
+    </ul>
 
+    '''
 
 @app.route("/about")
 def hello_world():
-    '''display a page which explains what our programs do'''
-    return "<p>Hello, This is our team's about page1</p>"
+    '''explains what our programs do'''
+    return "<h1> compare program is used to compare two numbers </h1>"
 
 @app.route("/team")
 def profile():
     '''display team members'pages'''
-    return "<h1>this is our team's bio page</h1>"
+    return '''
+    <h1>this is our team's bio page</h1>
+        <p>Our team has four members. They are Jeremy Huey, Mengli Yang, 
+         Chris Tighe, and Ijeoma Ogbogu.</p>
+    '''
 
-if __name__=='__main__':
-    app.run(debug=True,port=5001)
-
-@app.route('/gptdemo', methods=['GET', 'POST'])
+@app.route('/form', methods=['GET', 'POST'])
 def gptdemo():
     ''' handle a get request by sending a form 
         and a post request by returning the GPT response
     '''
     if request.method == 'POST':
         prompt = request.form['prompt']
-        answer = gptAPI.getResponse(prompt)
+        answer = gptAPI.compare(prompt)
         return f'''
         <h1>GPT Demo</h1>
         <pre style="bgcolor:yellow">{prompt}</pre>
@@ -80,5 +86,4 @@ def gptdemo():
         '''
 
 if __name__=='__main__':
-    # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True,port=5001)
