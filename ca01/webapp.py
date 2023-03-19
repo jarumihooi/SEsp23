@@ -15,7 +15,7 @@ On Mac
 On Windows:
 % pip install openai
 % pip install flask
-% $env:APIKEY="....." # in powershell
+% $env:APIKEY="....." # in powershell # $ . secret.sh
 % python gptwebapp.py
 '''
 from flask import request,redirect,url_for,Flask
@@ -82,6 +82,25 @@ def gptdemo():
             <p><input type=submit value="get response">
         </form>
         '''
+
+
+
+@app.route('/task', methods=['GET', 'TASK'])
+def task():
+    '''
+    Explanation of this method
+    '''
+    if request.method == "TASK":
+        prompt = request.form['prompt']
+        answer = gptAPI.compare(prompt)
+        return '''f
+        <h1>TASK DEMO</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        
+        '''
+
 
 if __name__=='__main__':
     app.run(debug=True,port=5001)

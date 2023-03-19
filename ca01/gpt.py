@@ -14,7 +14,8 @@ On Mac
 
 On Windows:
 % pip install openai
-% $env:APIKEY="....." # in powershell
+% $env:APIKEY="....." # in powershell, switch to ubuntu rofl. Then use $ . secret.sh (make sure its chmod +x)
+% to check, then use $ export -p and look for at the top: declare -x APIKEY="<the key>>"
 % python gpt.py
 '''
 import openai
