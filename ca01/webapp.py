@@ -36,7 +36,7 @@ def index():
         <li><a href = "/compose">Jeremy Huey's compose Prompt</a></li>
         <li><a href = "https://github.com/ctighebrandeis">Chris Tighe</a></li>
         <li><a href = "https://github.com/i-bog?tab=repositories">Ijeoma Ogbogu</a></li>
-        <li><a href = "https://github.com/mengliyang2023">Mengli Yang</a></li>
+        <li><a href = "/compare">Mengli Yang</a></li>
     </ul>
 
     '''
@@ -132,13 +132,41 @@ def compose():
         <div style="border:thin solid black">{answer}</div>
         Here is the answer in "pre" mode: 
         <pre style="border:thin solid black">{answer}</pre>
-        <a href={url_for('proofhelp')}> make another query</a>
-    
+        <a href={url_for('compose')}> make another query</a>
         '''
+        # bugfix: change /proofhelp to /compose
     else:
         return '''
         <h1>Compose-based on mood GPT Demo App</h1>
         Enter a mood that you want musical composition help with:
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+
+@app.route('/compare', methods=['GET', 'POST'])
+def compare():
+    ''' handle a get request by sending a form 
+        and a post request by returning the GPT response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.compare(prompt)
+        return f'''
+        <h1>Compare your numbers here!</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('gptdemo')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>GPT Demo App</h1>
+        Enter your query below
         <form method="post">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">
