@@ -161,8 +161,7 @@ def seasonalfruit():
         prompt = request.form['prompt']
         print(prompt)
         # I'll need to add the string append here for prompt engineering
-        prompt = "Please give the best season to eat : " + prompt
-        answer = gptAPI.compare(prompt)
+        answer = gptAPI.seasonal_fruit(prompt)
         return f'''
         <h1>GPT Demo</h1>
         <pre style="bgcolor:yellow">{prompt}</pre>
