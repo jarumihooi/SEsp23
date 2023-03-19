@@ -15,7 +15,7 @@ On Mac
 On Windows:
 % pip install openai
 % pip install flask
-% $env:APIKEY="....." # in powershell # $ . secret.sh
+% $env:APIKEY="....." # in powershell
 % python gptwebapp.py
 '''
 from flask import request,redirect,url_for,Flask
@@ -33,7 +33,7 @@ def index():
     return '''
       <h1>Following links are our team members' links</h1>
       <ul type="circle">
-        <li><a href = "https://github.com/jarumihooi">Jeremy Huey</a></li>
+        <li><a href = "/about">Jeremy Huey</a></li>
         <li><a href = "https://github.com/ctighebrandeis">Chris Tighe</a></li>
         <li><a href = "https://github.com/i-bog?tab=repositories">Ijeoma Ogbogu</a></li>
         <li><a href = "https://github.com/mengliyang2023">Mengli Yang</a></li>
@@ -82,7 +82,37 @@ def gptdemo():
             <p><input type=submit value="get response">
         </form>
         '''
-
+    
+@app.route('/proofhelp', methods=['GET', 'POST'])
+def proofhelp():
+    ''' handle a get request by sending a form 
+        and a post request by returning the GPT response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        print(prompt)
+        # I'll need to add the string append here for prompt engineering
+        prompt = "Please explain the following mathematical proof or theorem in plain english: " + prompt
+        answer = gptAPI.compare(prompt)
+        return f'''
+        <h1>GPT Demo</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('proofhelp')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>GPT Demo App</h1>
+        Enter the name of a proof or theorem you want explained below.
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
 
 
 @app.route('/task', methods=['GET', 'TASK'])
@@ -98,9 +128,10 @@ def task():
         <pre style="bgcolor:yellow">{prompt}</pre>
         <hr>
         Here is the answer in text mode:
-        
+
         '''
 
 
 if __name__=='__main__':
     app.run(debug=True,port=5001)
+
