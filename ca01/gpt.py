@@ -32,8 +32,27 @@ class GPT():
         # Set up the model and prompt
         self.model_engine = "text-davinci-003"
 
-    def compare(self):
+
+    def compose(self,compose_prompt):
         '''Compare two number'''
+        prompt = "Please give a musical composition or chord changes based on this mood: " + compose_prompt
+        print("prompt", prompt)
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt = prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+
+        response = completion.choices[0].text
+        print("response", response)
+        return response
+
+    def compare(self, prompt):
+        '''Compare two number'''
+        prompt = "What are two numbers you want to compare? enter like a or b: " + prompt
         completion = openai.Completion.create(
             engine=self.model_engine,
             prompt = prompt,
@@ -50,4 +69,4 @@ class GPT():
 if __name__=='__main__':
     import os
     g = GPT(os.environ.get("APIKEY"))
-    print(g.compare('which number is greater? 10000 or 1000? '))
+    
