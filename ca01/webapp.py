@@ -33,10 +33,12 @@ def index():
     return '''
       <h1>Following links are our team members' links</h1>
       <ul type="circle">
-        <li><a href = "/compose">Jeremy Huey's compose Prompt</a></li>
-        <li><a href = "https://github.com/ctighebrandeis">Chris Tighe</a></li>
+        <li><a href = "/about">Jeremy Huey</a></li>
+        <li><a href = "/proofhelp">Chris Tighe's Math Proof Explainer</a></li>
         <li><a href = "/seasonalfruit">Ijeoma Ogbogu</a></li>
-        <li><a href = "https://github.com/mengliyang2023">Mengli Yang</a></li>
+        <li><a href = "/compare">Mengli Yang</a></li>
+        <li><a href = "/about">About the Project</a></li>
+        <li><a href = "/team">About the Team</a></li>
     </ul>
 
     '''
@@ -44,7 +46,10 @@ def index():
 @app.route("/about")
 def hello_world():
     '''explains what our programs do'''
-    return "<h1> compare program is used to compare two numbers </h1>"
+    return '''<h1> Programs by person: </h1>
+        <h3> Chris </h3>
+        <p>Math proofs can be difficult to understand. Provide the name of a proof and get an explanation.</p>
+    '''
 
 @app.route("/team")
 def profile():
@@ -53,6 +58,10 @@ def profile():
     <h1>this is our team's bio page</h1>
         <p>Our team has four members. They are Jeremy Huey, Mengli Yang, 
          Chris Tighe, and Ijeoma Ogbogu.</p>
+        <h3>Chris</h3>
+        <p>Chris is a Master's student in the Computer Science department at Brandeis University.<br>
+         He finished undergraduate studies in Spring 2022 with a BS in Math and Computer Science.<br>
+         His role was general guidance and organization in addition to resolving merge conflicts.</p>
     '''
 
 #leaving in just in case, written: by Tim Hickey
@@ -92,9 +101,7 @@ def proofhelp():
     if request.method == 'POST':
         prompt = request.form['prompt']
         print(prompt)
-        # I'll need to add the string append here for prompt engineering
-        prompt = "Please explain the following mathematical proof or theorem in plain english: " + prompt
-        answer = gptAPI.compare(prompt)
+        answer = gptAPI.proof_help(prompt)
         return f'''
         <h1>GPT Demo</h1>
         <pre style="bgcolor:yellow">{prompt}</pre>
@@ -113,7 +120,7 @@ def proofhelp():
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">
         </form>
-        '''
+        ''' 
 
 @app.route('/compose', methods=['GET', 'POST']) # GET is to jsut get the page. Post is if they pushed the button.
 def compose():
@@ -193,7 +200,7 @@ def compare():
         <div style="border:thin solid black">{answer}</div>
         Here is the answer in "pre" mode:
         <pre style="border:thin solid black">{answer}</pre>
-        <a href={url_for('gptdemo')}> make another query</a>
+        <a href={url_for('compare')}> make another query</a>
         '''
     else:
         return '''
