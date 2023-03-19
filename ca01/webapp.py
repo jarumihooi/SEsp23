@@ -49,6 +49,8 @@ def hello_world():
     return '''<h1> Programs by person: </h1>
         <h3> Chris </h3>
         <p>Math proofs can be difficult to understand. Provide the name of a proof and get an explanation.</p>
+        <h3> Mengli </h3>
+        <p>Compare program asks the user to ask what numbers they want to compare.</p>
         <h3> Ijeoma </h3>
         <p>Eating seasonally is the best for the environment and the quality of fruit, find out the 
         the best seasons to eat certain fruits.</p>
@@ -58,17 +60,13 @@ def hello_world():
 def profile():
     '''display team members'pages'''
     return '''
-    <h1>this is our team's bio page</h1>
+    <h1>This is our team's bio page</h1>
         <p>Our team has four members. They are Jeremy Huey, Mengli Yang, 
          Chris Tighe, and Ijeoma Ogbogu.</p>
         <h3>Chris</h3>
         <p>Chris is a Master's student in the Computer Science department at Brandeis University.<br>
          He finished undergraduate studies in Spring 2022 with a BS in Math and Computer Science.<br>
          His role was general guidance and organization in addition to resolving merge conflicts.</p>
-        <h3>Ijeoma </h3>
-        <p>Ijeoma is a Master's student in the Computer Science department at Brandeis University.<br>
-         She has her BA Anthropology and is also doing math research Brandeis. <br>
-         Her was creating a seasonal fruit prompt.</p>
     '''
 
 #leaving in just in case, written: by Tim Hickey
