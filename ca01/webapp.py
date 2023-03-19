@@ -54,7 +54,10 @@ def hello_world():
         <h3> Ijeoma </h3>
         <p>Eating seasonally is the best for the environment and the quality of fruit, find out the 
         the best seasons to eat certain fruits.</p>
+        <h3> Jeremy </h3>
+        <p>This prompt takes in a mood and gives back a set of chord progressions you can try to play.</p>
     '''
+    # <h3> tells what size font to use
 
 @app.route("/team")
 def profile():
@@ -67,6 +70,12 @@ def profile():
         <p>Chris is a Master's student in the Computer Science department at Brandeis University.<br>
          He finished undergraduate studies in Spring 2022 with a BS in Math and Computer Science.<br>
          His role was general guidance and organization in addition to resolving merge conflicts.</p>
+         <h3>Jeremy</h3>
+         <p>Jeremy is a Master's student in the CS department at Brandeis University.<br>
+         He did Music Composition and Film Scoring dual major BA at Berklee College of Music.<br>
+         His interests are in the application of composition, why language symbols (like musical entities)<br>
+         mean anything at all/ the symbol->reference issue.
+         His role was adding a team prompt and helping to work through merge conflicts and team coordination.</p3>
     '''
 
 #leaving in just in case, written: by Tim Hickey
