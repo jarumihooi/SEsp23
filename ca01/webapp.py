@@ -138,9 +138,8 @@ def compare():
     '''
     if request.method == 'POST':
         prompt = request.form['prompt']
-        answer = gptAPI.compare()
-        prompt = "What are two numbers you want to compare?" + prompt
-        answer = gptAPI.compare()
+        answer = gptAPI.compare(prompt)
+        answer = gptAPI.compare(prompt)
         return f'''
         <h1>Compare your numbers here!</h1>
         <pre style="bgcolor:yellow">{prompt}</pre>
