@@ -33,7 +33,7 @@ def index():
     return '''
       <h1>Following links are our team members' links</h1>
       <ul type="circle">
-        <li><a href = "/about">Jeremy Huey</a></li>
+        <li><a href = "/compose">Jeremy Huey</a></li>
         <li><a href = "/proofhelp">Chris Tighe's Math Proof Explainer</a></li>
         <li><a href = "/seasonalfruit">Ijeoma Ogbogu</a></li>
         <li><a href = "/compare">Mengli Yang</a></li>
