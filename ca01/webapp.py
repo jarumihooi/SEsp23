@@ -80,6 +80,11 @@ def profile():
          <p>Ijeoma is a Master's student in the Computer Science department at Brandeis University.<br>
          She has her BA Anthropology and is also doing math research Brandeis. <br>
          Her was creating a seasonal fruit prompt.</p>
+        <h3>Mengli</h3>
+        <p>Mengli is a first year Master's student doing Computer Science for Non-CS majors.<br>
+          She decided to change her career path to tech field because she wants to learn something creativea and intresting. <br>
+          Her role was completing her own prompt engineering program and cooprate with other team mates.</p>
+
     '''
 
 #leaving in just in case, written: by Tim Hickey
