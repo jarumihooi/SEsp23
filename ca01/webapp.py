@@ -33,7 +33,7 @@ def index():
     return '''
       <h1>Following links are our team members' links</h1>
       <ul type="circle">
-        <li><a href = "/about">Jeremy Huey</a></li>
+        <li><a href = "/compose">Jeremy Huey's compose Prompt</a></li>
         <li><a href = "https://github.com/ctighebrandeis">Chris Tighe</a></li>
         <li><a href = "https://github.com/i-bog?tab=repositories">Ijeoma Ogbogu</a></li>
         <li><a href = "https://github.com/mengliyang2023">Mengli Yang</a></li>
@@ -115,22 +115,36 @@ def proofhelp():
         '''
 
 
-@app.route('/task', methods=['GET', 'TASK'])
-def task():
+@app.route('/compose', methods=['GET', 'POST']) # GET is to jsut get the page. Post is if they pushed the button.
+def compose():
     '''
     Explanation of this method
     '''
-    if request.method == "TASK":
+    if request.method == "POST":
         prompt = request.form['prompt']
-        answer = gptAPI.compare(prompt)
-        return '''f
-        <h1>TASK DEMO</h1>
+        answer = gptAPI.compose(prompt)
+        # bug fix lol i put the f behind teh three dashes.
+        return f'''
+        <h1>Compose-based on mood GPT Demo App</h1>
         <pre style="bgcolor:yellow">{prompt}</pre>
         <hr>
         Here is the answer in text mode:
-
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode: 
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('proofhelp')}> make another query</a>
+    
         '''
-
+    else:
+        return '''
+        <h1>Compose-based on mood GPT Demo App</h1>
+        Enter a mood that you want musical composition help with:
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+        # makes an html method called post.
 
 if __name__=='__main__':
     app.run(debug=True,port=5001)

@@ -32,6 +32,23 @@ class GPT():
         # Set up the model and prompt
         self.model_engine = "text-davinci-003"
 
+    def compose(self,compose_prompt):
+        '''Compare two number'''
+        prompt = "Please give a musical composition or chord changes based on this mood: " + compose_prompt
+        print("prompt", prompt)
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt = prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+
+        response = completion.choices[0].text
+        print("response", response)
+        return response
+
     def compare(self,prompt):
         '''Compare two number'''
         completion = openai.Completion.create(
