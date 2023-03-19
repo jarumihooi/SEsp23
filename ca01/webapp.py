@@ -165,8 +165,8 @@ def compare():
         '''
     else:
         return '''
-        <h1>GPT Demo App</h1>
-        Enter your query below
+        <h1>You are using compare method</h1>
+        What are two numbers you want to compare? Enter a full setence below:
         <form method="post">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">

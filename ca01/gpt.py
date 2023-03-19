@@ -52,7 +52,7 @@ class GPT():
 
     def compare(self, prompt):
         '''Compare two number'''
-        prompt = "What are two numbers you want to compare? enter like a or b: " + prompt
+        prompt = "What are two numbers you want to compare? enter a full sentence, please: " + prompt
         completion = openai.Completion.create(
             engine=self.model_engine,
             prompt = prompt,
