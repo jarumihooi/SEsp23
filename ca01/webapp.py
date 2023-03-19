@@ -76,6 +76,10 @@ def profile():
          His interests are in the application of composition, why language symbols (like musical entities)<br>
          mean anything at all/ the symbol->reference issue.
          His role was adding a team prompt and helping to work through merge conflicts and team coordination.</p3>
+         <h3>Ijeoma </h3>
+         <p>Ijeoma is a Master's student in the Computer Science department at Brandeis University.<br>
+         She has her BA Anthropology and is also doing math research Brandeis. <br>
+         Her was creating a seasonal fruit prompt.</p>
     '''
 
 #leaving in just in case, written: by Tim Hickey
