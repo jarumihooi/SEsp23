@@ -32,7 +32,7 @@ class GPT():
         # Set up the model and prompt
         self.model_engine = "text-davinci-003"
 
-    def compare(self,prompt):
+    def compare(self):
         '''Compare two number'''
         completion = openai.Completion.create(
             engine=self.model_engine,
