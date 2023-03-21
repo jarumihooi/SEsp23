@@ -9,12 +9,12 @@ from transaction import Transaction
 def print_usage():
     ''' print an explanation of how to use this command '''
     print('''usage:
-            todo show
-            todo showall
-            todo showcomplete
-            todo add name description
-            todo complete item_id
-            todo delete item_id
+            transation show
+            transation showall
+            transation showcomplete
+            transation add name description
+            transation complete item_id
+            transation delete item_id
             '''
             )
 
@@ -39,14 +39,49 @@ def process_args(arglist):
     
     if arglist==[]:
         print_usage()
-    elif arglist[0]=="quit":
-
+    # ==== J
     elif arglist[0]=="show":
         print_tactions(t.selectActive())
     elif arglist[0]=="showcat":
         print_tactions(tactions = t.selectAll())
-    elif arglist[0]=="showcomplete":
+    elif arglist[0]=="addcat":
         print_tactions(t.selectCompleted())
+    # ==== end J
+
+    # ==== C
+    elif arglist[0]=="4":
+        print_tactions(t.selectCompleted())
+    elif arglist[0]=="5":
+        print_tactions(t.selectCompleted())
+    elif arglist[0]=="6":
+        print_tactions(t.selectCompleted())
+
+    # ==== end C
+
+    # ==== I
+    elif arglist[0] == "6":
+        print_tactions(t.selectCompleted())
+    elif arglist[0] == "10":
+        print_tactions(t.selectCompleted())
+    elif arglist[0] == "11":
+        print_tactions(t.selectCompleted())
+
+    # ==== end I
+
+    # ==== ML
+    elif arglist[0] == "7":
+        print_tactions(t.selectCompleted())
+    elif arglist[0] == "8":
+        print_tactions(t.selectCompleted())
+    elif arglist[0] == "9":
+        print_tactions(t.selectCompleted())
+    # else: #extra failed commands
+    #     print(arglist,"is not implemented")
+    #     print_usage()
+
+    # ==== end ML
+
+    # ==== this is exxtra code you can use.
     elif arglist[0]=='add':
         if len(arglist)!=3:
             print_usage()
@@ -63,9 +98,13 @@ def process_args(arglist):
             print_usage()
         else:
             t.delete(arglist[1])
-    else:
-        print(arglist,"is not implemented")
-        print_usage()
+
+
+
+
+    # ==== end extra code
+
+
 
 
 def toplevel():
@@ -75,13 +114,20 @@ def toplevel():
         # so prompt for them in a loop
         print_usage()
         args = []
-        while args != ['']:
+        quitt = False;
+        while args != [''] and not quitt:
             args = input("command> ").split(' ')
             if args[0] == 'add':
                 # join everyting after the name as a string
                 args = ['add', args[1], " ".join(args[2:])]
+            elif args[0] == 'quit':
+                quitt = True
+                print("Quitting the transcation shell.")
+                continue
             process_args(args)
             print('-' * 40 + '\n' * 3)
+
+
     else:
         # read the args and process them
         args = sys.argv[1:]
