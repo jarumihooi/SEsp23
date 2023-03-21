@@ -11,6 +11,12 @@ class Transaction():
         self.db = db
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
                     (item_num int, amount int, category text, date date, description text)''',())
+        
+
+    def addTransaction(self,item):
+        self.runQuery('''INSERT INTO transactions VALUES(?,?,?,?,?)''', (item['item_num'],item['amount'],item['category'],item['date'],item['desc']))
+
+    
 
 
 
