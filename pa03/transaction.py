@@ -25,6 +25,9 @@ class Transaction():
 
     # ==== C
 
+    def addTransaction(self,item):
+        self.runQuery('''INSERT INTO transactions VALUES (?,?,?,?,?)''', (item['item_num'],item['amount'],item['category'],item['date'],item['desc']))
+
     # ==== end C
 
     # ==== I
@@ -35,7 +38,7 @@ class Transaction():
 
     # ==== end ML
 
-    # ==== The original given code + The method Chris made! ====
+    # ==== The original given code ====
     def selectActive(self):
         ''' return all of the uncompleted tasks as a list of dicts.'''
         return self.runQuery("SELECT rowid,* from todo where completed=0",())
@@ -59,9 +62,6 @@ class Transaction():
     def setComplete(self,rowid):
         ''' mark a todo item as completed '''
         return self.runQuery("UPDATE todo SET completed=1 WHERE rowid=(?)",(rowid,))
-
-    def addTransaction(self,item):
-        self.runQuery('''INSERT INTO transactions VALUES (?,?,?,?,?)''', (item['item_num'],item['amount'],item['category'],item['date'],item['desc']))
 
     # ==== end orig code section.
     
