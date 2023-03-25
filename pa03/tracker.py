@@ -9,33 +9,30 @@ from transaction import Transaction
 def print_usage():
     ''' print an explanation of how to use this command '''
     print('''usage:
-            transation show
-            transation showall
-            transation showcomplete
-            transation add name description
-            transation complete item_id
-            transation delete item_id
+            transaction show
+            transaction showall
+            transaction showcomplete
+            transaction add amount category date description
+            transaction complete item_id
+            transaction delete item_id
             '''
             )
 
 def print_tactions(tactions):
-    ''' print the transaction items '''
+    ''' print the transaction items - Chris modified to work with transactions'''
     if len(tactions)==0:
-        print('no transactions to print')
+        # print('no transactions to print')
         return
     print('\n')
-    print("%-10s %-10s %-30s %-10s"%('item #','title','desc','completed'))
+    print("%-10s %-10s %-10s %-20s %-30s"%('item #','amount','category','date', 'description'))
     print('-'*40)
     for item in tactions:
-        values = tuple(item.values()) #(rowid,title,desc,completed)
-        print("%-10s %-10s %-30s %2d"%values)
+        values = tuple(item.values()) #(item_num,amount,category,date,description)
+        print("%-10s %-10s %-10s %-20s %-30s"%values)
 
 def process_args(arglist):
     ''' examine args and make appropriate calls to Transaction'''
     t = Transaction('tracker.db')
-    item = {'item_num': 2, 'amount': 5, 'category': 'food', 'date': 'Aug 5 2022', 'desc': 'Food for the week'}
-    t.addTransaction(item)
-    print(t.runQuery('SELECT * FROM transactions', ()))
     
     if arglist==[]:
         print_usage()
@@ -48,15 +45,20 @@ def process_args(arglist):
         print_tactions(t.selectCompleted())
     # ==== end J
 
-    # ==== C
-    elif arglist[0]=="4":
-        print_tactions(t.selectCompleted())
-    elif arglist[0]=="5":
-        print_tactions(t.selectCompleted())
-    elif arglist[0]=="6":
-        print_tactions(t.selectCompleted())
+    # ==== Chris
+    elif arglist[0]=="modcat":
+        # Assuming that modify means modify category of a transaction (may change if we swap to addtl table for categories)
+        t.modifyCategory(arglist[1],arglist[2])
+    elif arglist[0]=="showall":
+        print_tactions(t.showTransactions())
+    elif arglist[0]=="add":
+        if len(arglist) != 5:
+            print_usage()
+        else:
+            item = {'amount':arglist[1],'category':arglist[2],'date':arglist[3],'desc':arglist[4]}
+            t.addTransaction(item)
 
-    # ==== end C
+    # ==== end Chris
 
     # ==== I
     elif arglist[0] == "6":
@@ -118,8 +120,8 @@ def toplevel():
         while args != [''] and not quitt:
             args = input("command> ").split(' ')
             if args[0] == 'add':
-                # join everyting after the name as a string
-                args = ['add', args[1], " ".join(args[2:])]
+                # join everyting after the amt,category,date as a string
+                args = ['add', args[1], args[2], args[3], " ".join(args[4:])]
             elif args[0] == 'quit':
                 quitt = True
                 print("Quitting the transcation shell.")
