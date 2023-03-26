@@ -11,6 +11,9 @@ def print_usage():
     print('''usage:
             transaction show
             transaction showall
+            transactions by date
+            transactions by month
+            transactions by year
             transaction showcomplete
             transaction add amount category date description
             transaction complete item_id
@@ -36,15 +39,6 @@ def process_args(arglist):
     
     if arglist==[]:
         print_usage()
-    # ==== J
-    elif arglist[0]=="show":
-        print_tactions(t.selectActive())
-    elif arglist[0]=="showcat":
-        print_tactions(tactions = t.selectAll())
-    elif arglist[0]=="addcat":
-        print_tactions(t.selectCompleted())
-    # ==== end J
-
     # ==== Chris
     elif arglist[0]=="modcat":
         # Assuming that modify means modify category of a transaction (may change if we swap to addtl table for categories)
@@ -71,42 +65,16 @@ def process_args(arglist):
     # ==== end I
 
     # ==== ML
-    elif arglist[0] == "7":
-        print_tactions(t.selectCompleted())
-    elif arglist[0] == "8":
-        print_tactions(t.selectCompleted())
-    elif arglist[0] == "9":
-        print_tactions(t.selectCompleted())
-    # else: #extra failed commands
-    #     print(arglist,"is not implemented")
-    #     print_usage()
-
+    elif arglist[0] == "date":
+        print_tactions(t.sum_by_date())
+    elif arglist[0] == "month":
+        print_tactions(t.sum_by_month())
+    elif arglist[0] == "year":
+        print_tactions(t.sum_by_year())
+    else:
+        print(arglist,"is not implemented")
+        print_usage()
     # ==== end ML
-
-    # ==== this is exxtra code you can use.
-    elif arglist[0]=='add':
-        if len(arglist)!=3:
-            print_usage()
-        else:
-            todo = {'title':arglist[1],'desc':arglist[2],'completed':0}
-            t.add(todo)
-    elif arglist[0]=='complete':
-        if len(arglist)!= 2:
-            print_usage()
-        else:
-            t.setComplete(arglist[1])
-    elif arglist[0]=='delete':
-        if len(arglist)!= 2:
-            print_usage()
-        else:
-            t.delete(arglist[1])
-
-
-
-
-    # ==== end extra code
-
-
 
 
 def toplevel():

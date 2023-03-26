@@ -20,10 +20,6 @@ class Transaction():
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
                     (amount int, category text, date text, description text)''',())
 
-    # ==== J
-
-    # ==== end J
-
     # ==== C
 
     def addTransaction(self,item):
@@ -46,40 +42,18 @@ class Transaction():
     # ==== end I
 
     # ==== ML
+    def sum_by_date(self):
+        '''summarize transactions by date @mengli yang'''
+        return self.runQuery("SELECT * FROM transactions WHERE DATE(date) = '2023-03-26'", ())
 
+    def sum_by_month(self):
+        '''summarize transactions by month @mengli yang'''
+        return self.runQuery("SELECT * FROM transactions WHERE strftime('%m', date) = '03'",())
+
+    def sum_by_year(self):
+        '''summarize transactions by year @mengli yang'''
+        return self.runQuery("SELECT * FROM transactions WHERE strftime('%Y', date) = '2023'",())
     # ==== end ML
-
-    # ==== The original given code ====
-    def selectActive(self):
-        ''' return all of the uncompleted tasks as a list of dicts.'''
-        return self.runQuery("SELECT rowid,* from todo where completed=0",())
-
-    def selectAll(self):
-        ''' return all of the tasks as a list of dicts.'''
-        return self.runQuery("SELECT rowid,* from todo",())
-
-    def selectCompleted(self):
-        ''' return all of the completed tasks as a list of dicts.'''
-        return self.runQuery("SELECT rowid,* from todo where completed=1",())
-
-    def add(self,item):
-        ''' create a todo item and add it to the todo table '''
-        return self.runQuery("INSERT INTO todo VALUES(?,?,?)",(item['title'],item['desc'],item['completed']))
-
-    def delete(self,rowid):
-        ''' delete a todo item '''
-        return self.runQuery("DELETE FROM todo WHERE rowid=(?)",(rowid,))
-
-    def setComplete(self,rowid):
-        ''' mark a todo item as completed '''
-        return self.runQuery("UPDATE todo SET completed=1 WHERE rowid=(?)",(rowid,))
-
-    # ==== end orig code section.
-    
-
-
-
-
 
 
     def runQuery(self,query,tuple):
