@@ -30,8 +30,9 @@ def print_tactions(tactions):
     print("%-10s %-10s %-10s %-20s %-30s"%('item #','amount','category','date', 'description'))
     print('-'*40)
     for item in tactions:
-        values = tuple(item.values()) #(item_num,amount,category,date,description)
-        print("%-10s %-10s %-10s %-20s %-30s"%values)
+        values = tuple(item.values()) #(item_num,amount,category,day,month,year,description)
+        date = str(values[4])+"/"+str(values[3])+"/"+str(values[5])
+        print("%-10s %-10s %-10s %-20s %-30s"%(values[0],values[1],values[2],date,values[6]))
 
 def process_args(arglist):
     ''' examine args and make appropriate calls to Transaction'''
@@ -49,7 +50,8 @@ def process_args(arglist):
         if len(arglist) != 5:
             print_usage()
         else:
-            item = {'amount':arglist[1],'category':arglist[2],'date':arglist[3],'desc':arglist[4]}
+            date = arglist[3].split("/")
+            item = {'amount':arglist[1],'category':arglist[2],'day':date[1],'month':date[0],'year':date[2],'desc':arglist[4]}
             t.addTransaction(item)
 
     # ==== end Chris
@@ -84,7 +86,7 @@ def toplevel():
         # so prompt for them in a loop
         print_usage()
         args = []
-        quitt = False;
+        quitt = False
         while args != [''] and not quitt:
             args = input("command> ").split(' ')
             if args[0] == 'add':

@@ -11,20 +11,21 @@ def toDict(t):
     t is a tuple (item_num,amount,category,date,description)
     Chris modified this to work with our dictionary structure.'''
     # print('t='+str(t))
-    dictt = {'item_num':t[0], 'amount':t[1], 'category text':t[2], 'date':t[3], 'desc':t[4]}
+    dictt = {'item_num':t[0], 'amount':t[1], 'category text':t[2], 'day':t[3], 'month':t[4], 'year':t[5], 'desc':t[6]}
     return dictt
 
 class Transaction():
     def __init__(self,db):
         self.db = db
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
-                    (amount int, category text, date text, description text)''',())
+                    (amount int, category text, day int, month int, year int, description text)''',())
 
     # ==== C
 
     def addTransaction(self,item):
         '''Chris wrote this- adds a transaction to the database'''
-        return self.runQuery("INSERT INTO transactions VALUES (?,?,?,?)", (item['amount'],item['category'],item['date'],item['desc']))
+        return self.runQuery("INSERT INTO transactions VALUES (?,?,?,?,?,?)", 
+                             (item['amount'],item['category'],item['day'],item['month'],item['year'],item['desc']))
 
     # This doesn't match the original planned technique for categories being pre-defined; instead they are strings, so being able to update them would make sense.
     def modifyCategory(self,row_id,new_cat):
