@@ -43,17 +43,17 @@ class Transaction():
     # ==== end I
 
     # ==== ML
-    def sum_by_date(self):
+    def sum_by_day(self):
         '''summarize transactions by date @mengli yang'''
-        return self.runQuery("SELECT * FROM transactions WHERE DATE(date) = '2023-03-26'", ())
+        return self.runQuery("SELECT * FROM transactions WHERE date = 26", ())
 
     def sum_by_month(self):
         '''summarize transactions by month @mengli yang'''
-        return self.runQuery("SELECT * FROM transactions WHERE strftime('%m', date) = '03'",())
+        return self.runQuery("SELECT * FROM transactions WHERE date = 03",())
 
     def sum_by_year(self):
         '''summarize transactions by year @mengli yang'''
-        return self.runQuery("SELECT * FROM transactions WHERE strftime('%Y', date) = '2023'",())
+        return self.runQuery("SELECT * FROM transactions WHERE date = 2023",())
     # ==== end ML
 
 

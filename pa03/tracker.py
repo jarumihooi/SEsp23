@@ -11,7 +11,7 @@ def print_usage():
     print('''usage:
             transaction show
             transaction showall
-            transactions by date
+            transactions by day
             transactions by month
             transactions by year
             transaction showcomplete
@@ -67,8 +67,8 @@ def process_args(arglist):
     # ==== end I
 
     # ==== ML
-    elif arglist[0] == "date":
-        print_tactions(t.sum_by_date())
+    elif arglist[0] == "day":
+        print_tactions(t.sum_by_day())
     elif arglist[0] == "month":
         print_tactions(t.sum_by_month())
     elif arglist[0] == "year":
@@ -91,7 +91,7 @@ def toplevel():
             args = input("command> ").split(' ')
             if args[0] == 'add':
                 # join everyting after the amt,category,date as a string
-                args = ['add', args[1], args[2], args[3], " ".join(args[4:])]
+                args = ['add', args[1], args[2], " ".join(args[3:])]
             elif args[0] == 'quit':
                 quitt = True
                 print("Quitting the transcation shell.")
