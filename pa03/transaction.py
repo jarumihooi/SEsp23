@@ -38,6 +38,24 @@ class Transaction():
     # ==== end C
 
     # ==== I
+    def delete_transaction(self, row_id):
+        return self.runQuery("DELETE FROM transactions WHERE rowid=(?)", (row_id,))
+
+    def sum_by_catergory(self):
+        return self.runQuery("SELECT rowid SUM(amount) FROM transactions GROUP BY category",())
+
+    def print_menu(self):
+        """
+        1. addTransaction - pass a transaction to insert
+        2. modifyCategory- use row id, category
+        3. showTransactions
+        4. delete_transaction - use row id
+        5. sum_by_category
+        6. sum_by_date
+        7. sum_by_month
+        8. sum_by_year
+        """
+
 
     # ==== end I
 
