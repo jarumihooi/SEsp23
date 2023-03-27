@@ -15,7 +15,7 @@ def print_usage():
     # transaction.print_menu()
     print('''usage:
             transaction quit
-            transaction modcat - do not use. This is depreciated. 
+            transaction modcat item_id new_category - eg. modcat 1 bills
             transaction showall
             transaction day
             transaction month
@@ -32,7 +32,7 @@ def print_tactions(tactions):
     if len(tactions)==0:
         # print('no transactions to print')
         return
-    print('\n')
+    # print('\n')
     print("%-10s %-10s %-10s %-20s %-30s"%('item #','amount','category','date', 'description'))
     print('-'*40)
     for item in tactions:
@@ -54,8 +54,8 @@ def process_args(arglist):
         print_tactions(t.showTransactions())
     elif arglist[0]=="add":
         if len(arglist) != 5:
-            print(arglist)
-            print("ERROR: ")
+            # print(arglist)
+            # print("ERROR: ")
             print_usage()
         else:
             date = arglist[3].split("/")
@@ -67,21 +67,25 @@ def process_args(arglist):
 
     # ==== I
     elif arglist[0] == "delete":
-        print_tactions(t.selectCompleted())
+        print_tactions(t.delete_transaction(int(arglist[1])))
     elif arglist[0] == "sumcat":
-        print_tactions(t.selectCompleted())
+        t.sum_by_category()
+        #print_tactions(t.sum_by_category())
     elif arglist[0] == "usage":
-        print_tactions(t.selectCompleted())
+        print_usage()
 
     # ==== end I
 
     # ==== ML
     elif arglist[0] == "day":
-        print_tactions(t.sum_by_day())
+        t.sum_by_day()
+        # print_tactions(t.sum_by_day())
     elif arglist[0] == "month":
-        print_tactions(t.sum_by_month())
+        t.sum_by_month()
+        # print_tactions(t.sum_by_month())
     elif arglist[0] == "year":
-        print_tactions(t.sum_by_year())
+        t.sum_by_year()
+        # print_tactions(t.sum_by_year())
     else:
         print(arglist,"is not implemented")
         print_usage()
@@ -107,10 +111,10 @@ def toplevel():
                 print("Quitting the transcation shell.")
                 continue
             process_args(args)
-            print('-' * 40 + '\n' * 3)
+            print('-' * 40 + '\n' * 1)
     else:
         # read the args and process them
         args = sys.argv[1:]
         process_args(args)
-        print('-' * 40 + '\n' * 3)
+        print('-' * 40 + '\n' * 1)
 toplevel()

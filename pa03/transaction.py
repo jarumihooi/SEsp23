@@ -49,39 +49,30 @@ class Transaction():
     def delete_transaction(self, row_id):
         return self.runQuery("DELETE FROM transactions WHERE rowid=(?)", (row_id,))
 
-    def sum_by_catergory(self):
-        return self.runQuery("SELECT rowid SUM(amount) FROM transactions GROUP BY category",())
+    def sum_by_category(self):
+        print("WARNING: Sum by Category is non-implemented")
+        #return self.runQuery("SELECT rowid SUM(amount) FROM transactions GROUP BY category",())
 
     def print_menu(self):
-        print("""
-        (Note <> show what to type, do not actually type these in the command request.)
-        To use in bash, run as: $ ./tracker.py <add a command from below here>
-        1. add < - pass a transaction to insert
-        2. modifyCategory- use row id, category
-        3. showTransactions
-        4. delete_transaction - use row id
-        5. sum_by_category
-        6. sum_by_date
-        7. sum_by_month
-        8. sum_by_year
-        9. quit
-        """)
-
-
+        # not implemented
+        pass;
     # ==== end I
 
     # ==== ML
     def sum_by_day(self):
         '''summarize transactions by date @mengli yang'''
-        return self.runQuery("SELECT * FROM transactions WHERE date = 26", ())
+        print("WARNING: Sum by Category is non-implemented")
+        # return self.runQuery("SELECT * FROM transactions WHERE date = 26", ())
 
     def sum_by_month(self):
         '''summarize transactions by month @mengli yang'''
-        return self.runQuery("SELECT * FROM transactions WHERE date = 03",())
+        print("WARNING: Sum by Category is non-implemented")
+        # return self.runQuery("SELECT * FROM transactions WHERE date = 03",())
 
     def sum_by_year(self):
         '''summarize transactions by year @mengli yang'''
-        return self.runQuery("SELECT * FROM transactions WHERE date = 2023",())
+        print("WARNING: Sum by Category is non-implemented")
+        # return self.runQuery("SELECT * FROM transactions WHERE date = 2023",())
     # ==== end ML
 
 
