@@ -1,11 +1,12 @@
-''' 
-Should be similar to todolist.py: 
+'''
+Should be similar to todolist.py:
   Acts as the ORM middle-stage between tracker.py and the database.
   Authors: @Tim Hickey @Jeremy Huey @mengli yang @Ijeoma @Igbogu @Chris Tighe
 '''
 
 import sqlite3
 import os
+
 
 def toDict(t):
     '''This method was reformatted with our 5 cols, we can print these dictts.
@@ -14,34 +15,36 @@ def toDict(t):
     @Chris Tighe modified this to work with our dictionary structure.
    '''
     # print('t='+str(t))
-    dictt = {'item_num':t[0], 'amount':t[1], 'category text':t[2], 'day':t[3],
-             'month':t[4], 'year':t[5], 'desc':t[6]}
+    dictt = {'item_num': t[0], 'amount': t[1], 'category text': t[2], 'day': t[3],
+             'month': t[4], 'year': t[5], 'desc': t[6]}
     return dictt
+
 
 class Transaction():
     '''
 
     '''
-    def __init__(self,db):
+
+    def __init__(self, db):
         self.db = db
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
-                    (amount int, category text, day int, month int, year int, description text)''',())
+                    (amount int, category text, day int, month int, year int, description text)''', ())
 
     # ==== C
 
-    def addTransaction(self,item):
+    def addTransaction(self, item):
         '''Chris wrote this- adds a transaction to the database'''
-        return self.runQuery("INSERT INTO transactions VALUES (?,?,?,?,?,?)", 
-                             (item['amount'],item['category'],item['day'],item['month'],item['year'],item['desc']))
+        return self.runQuery("INSERT INTO transactions VALUES (?,?,?,?,?,?)",
+                             (item['amount'], item['category'], item['day'], item['month'], item['year'], item['desc']))
 
     # This doesn't match the original planned technique for categories being pre-defined; instead they are strings, so being able to update them would make sense.
-    def modifyCategory(self,row_id,new_cat):
+    def modifyCategory(self, row_id, new_cat):
         '''Chris wrote this- modifies the category of a transaction'''
-        return self.runQuery("UPDATE transactions SET category=(?) WHERE rowid=(?)",(new_cat,row_id))
-    
+        return self.runQuery("UPDATE transactions SET category=(?) WHERE rowid=(?)", (new_cat, row_id))
+
     def showTransactions(self):
         '''Chris wrote this- shows all transactions in the database'''
-        return self.runQuery("SELECT rowid,* FROM transactions",())
+        return self.runQuery("SELECT rowid,* FROM transactions", ())
 
     # ==== end C
 
@@ -51,11 +54,12 @@ class Transaction():
 
     def sum_by_category(self):
         print("WARNING: Sum by Category is non-implemented")
-        #return self.runQuery("SELECT rowid SUM(amount) FROM transactions GROUP BY category",())
+        # return self.runQuery("SELECT rowid SUM(amount) FROM transactions GROUP BY category",())
 
     def print_menu(self):
         # not implemented
         pass;
+
     # ==== end I
 
     # ==== ML
@@ -73,17 +77,16 @@ class Transaction():
         '''summarize transactions by year @mengli yang'''
         print("WARNING: Sum by Category is non-implemented")
         # return self.runQuery("SELECT * FROM transactions WHERE date = 2023",())
+
     # ==== end ML
 
-
-    def runQuery(self,query,tuple):
-        ''' return all of the uncompleted tasks as a list of dicts. 
+    def runQuery(self, query, tuple):
+        ''' return all of the uncompleted tasks as a list of dicts.
             Chris modified to make the dictionary structure work with transactions.'''
-        con= sqlite3.connect(self.db)
-        cur = con.cursor() 
-        cur.execute(query,tuple)
+        con = sqlite3.connect(self.db)
+        cur = con.cursor()
+        cur.execute(query, tuple)
         tuples = cur.fetchall()
         con.commit()
         con.close()
         return [toDict(t) for t in tuples]
-    
