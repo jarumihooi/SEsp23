@@ -80,7 +80,8 @@ def process_args(arglist):
 
 
 def toplevel():
-    ''' read the command args and process them'''
+    ''' read the command args and process them
+    @Jeremy Huey added quit. '''
     if len(sys.argv) == 1:
         # they didn't pass any arguments,
         # so prompt for them in a loop
@@ -98,13 +99,9 @@ def toplevel():
                 continue
             process_args(args)
             print('-' * 40 + '\n' * 3)
-
-
     else:
         # read the args and process them
         args = sys.argv[1:]
         process_args(args)
         print('-' * 40 + '\n' * 3)
-
-
 toplevel()

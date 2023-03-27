@@ -1,6 +1,7 @@
 ''' 
 Should be similar to todolist.py: 
   Acts as the ORM middle-stage between tracker.py and the database.
+  Authors: @Tim Hickey @Jeremy Huey @mengli yang @Ijeoma @Igbogu @Chris Tighe
 '''
 
 import sqlite3
@@ -9,12 +10,18 @@ import os
 def toDict(t):
     '''This method was reformatted with our 5 cols, we can print these dictts.
     t is a tuple (item_num,amount,category,date,description)
-    Chris modified this to work with our dictionary structure.'''
+    @Jeremy Huey added the starter code.
+    Chris modified this to work with our dictionary structure.
+   '''
     # print('t='+str(t))
-    dictt = {'item_num':t[0], 'amount':t[1], 'category text':t[2], 'day':t[3], 'month':t[4], 'year':t[5], 'desc':t[6]}
+    dictt = {'item_num':t[0], 'amount':t[1], 'category text':t[2], 'day':t[3],
+             'month':t[4], 'year':t[5], 'desc':t[6]}
     return dictt
 
 class Transaction():
+    '''
+
+    '''
     def __init__(self,db):
         self.db = db
         self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
