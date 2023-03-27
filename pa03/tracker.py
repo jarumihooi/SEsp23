@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 '''
 Should be similar to todo2.py - user input gets translated to ORM calls
+Authors: @Tim Hickey @Jeremy Huey @mengli yang @Ijeoma @Igbogu @Chris Tighe
 '''
 
 import sys
@@ -11,7 +12,7 @@ from transaction import Transaction
 
 def print_usage():
     ''' print an explanation of how to use this command
-    @Jeremy Huey edited this to match our '''
+    @Jeremy Huey edited this to match our project'''
     # transaction.print_menu()
     print('''usage:
             transaction quit
@@ -65,7 +66,7 @@ def process_args(arglist):
 
     # ==== end Chris
 
-    # ==== I
+    # ==== I and J @Jeremy Huey @Ijeoma Igbogu
     elif arglist[0] == "delete":
         print_tactions(t.delete_transaction(int(arglist[1])))
     elif arglist[0] == "sumcat":
@@ -74,7 +75,7 @@ def process_args(arglist):
     elif arglist[0] == "usage":
         print_usage()
 
-    # ==== end I
+    # ==== end I and J
 
     # ==== ML
     elif arglist[0] == "day":

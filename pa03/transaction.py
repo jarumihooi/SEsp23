@@ -53,28 +53,35 @@ class Transaction():
         return self.runQuery("DELETE FROM transactions WHERE rowid=(?)", (row_id,))
 
     def sum_by_category(self):
+        '''written by @Ijeoma Igbogu
+        edited by @Jeremy Huey'''
         print("WARNING: Sum by Category is non-implemented")
         # return self.runQuery("SELECT rowid SUM(amount) FROM transactions GROUP BY category",())
 
     def print_menu(self):
+        '''edited by @Jeremy Huey'''
         # not implemented
         pass;
 
     # ==== end I
 
     # ==== ML
+
     def sum_by_day(self):
-        '''summarize transactions by date @mengli yang'''
+        '''summarize transactions by date @mengli yang
+        edited by @Jeremy Huey'''
         print("WARNING: Sum by Category is non-implemented")
         # return self.runQuery("SELECT * FROM transactions WHERE date = 26", ())
 
     def sum_by_month(self):
-        '''summarize transactions by month @mengli yang'''
+        '''summarize transactions by month @mengli yang
+        edited by @Jeremy Huey'''
         print("WARNING: Sum by Category is non-implemented")
         # return self.runQuery("SELECT * FROM transactions WHERE date = 03",())
 
     def sum_by_year(self):
-        '''summarize transactions by year @mengli yang'''
+        '''summarize transactions by year @mengli yang
+        edited by @Jeremy Huey'''
         print("WARNING: Sum by Category is non-implemented")
         # return self.runQuery("SELECT * FROM transactions WHERE date = 2023",())
 
