@@ -23,6 +23,46 @@ In this code, methods are called which return the sqlite3 queries that query/mod
 
 run pylint ==== 
 
+************* Module tracker
+tracker.py:47:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:52:0: C0301: Line too long (123/100) (line-too-long)
+tracker.py:63:0: C0301: Line too long (125/100) (line-too-long)
+tracker.py:121:0: C0304: Final newline missing (missing-final-newline)
+tracker.py:37:10: C0209: Formatting a regular string which could be a f-string (consider-using-f-string)
+tracker.py:42:14: C0209: Formatting a regular string which could be a f-string (consider-using-f-string)
+tracker.py:46:4: C0103: Variable name "t" doesn't conform to snake_case naming style (invalid-name)
+tracker.py:44:0: R0912: Too many branches (13/12) (too-many-branches)
+tracker.py:8:0: W0611: Unused import os (unused-import)
+tracker.py:10:0: W0611: Unused import transaction (unused-import)
+
+-----------------------------------
+Your code has been rated at 8.39/10
+
+************* Module transaction
+transaction.py:31:0: C0301: Line too long (103/100) (line-too-long)
+transaction.py:38:0: C0301: Line too long (120/100) (line-too-long)
+transaction.py:40:0: C0301: Line too long (162/100) (line-too-long)
+transaction.py:43:0: C0301: Line too long (103/100) (line-too-long)
+transaction.py:64:0: W0301: Unnecessary semicolon (unnecessary-semicolon)
+transaction.py:11:0: C0103: Function name "toDict" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:11:11: C0103: Argument name "t" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:23:0: C0112: Empty class docstring (empty-docstring)
+transaction.py:29:8: C0103: Attribute name "db" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:28:23: C0103: Argument name "db" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:35:4: C0103: Method name "addTransaction" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:41:4: C0103: Method name "modifyCategory" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:45:4: C0103: Method name "showTransactions" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:52:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:64:8: W0107: Unnecessary pass statement (unnecessary-pass)
+transaction.py:90:4: C0103: Method name "runQuery" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:90:30: W0622: Redefining built-in 'tuple' (redefined-builtin)
+transaction.py:8:0: W0611: Unused import os (unused-import)
+
+-----------------------------------
+Your code has been rated at 4.86/10
+
+
+
 run pytest ====
 Launching pytest with arguments /Users/jomogbogu/Desktop/lk/main.py --no-header --no-summary -q in /Users/jomogbogu/Desktop/lk
 
