@@ -1,3 +1,4 @@
+Version 1.0
 Describe app ====
 Authors: @Tim Hickey @Jeremy Huey @mengli yang @Ijeoma Igbogu @Chris Tighe
 
@@ -78,6 +79,17 @@ main.py::test_delete_transaction PASSED                                  [100%]
 ============================== 4 passed in 1.46s ===============================
 
 Process finished with exit code 0
+
+kay@Zeffi:/mnt/c/Users/J/Documents/Classes/Class+Sp+2023/1_SE/SEsp23/pa03$ pytest test_transaction.py 
+====================================================================================== test session starts =======================================================================================
+platform linux -- Python 3.10.6, pytest-7.2.2, pluggy-1.0.0
+rootdir: /mnt/c/Users/J/Documents/Classes/Class+Sp+2023/1_SE/SEsp23/pa03
+plugins: anyio-3.6.2
+collected 5 items
+
+test_transaction.py .....                                                                                                                                                                  [100%]
+
+======================================================================================= 5 passed in 0.46s ========================================================================================
 
 run tracker.py ====
 See transcript.txt 
