@@ -1,13 +1,22 @@
 #!/usr/bin/python3
 '''
 Should be similar to todo2.py - user input gets translated to ORM calls
+This is the main executable for the transaction project.
+It creates the interface shell which calls ORM sqlite3 calls in transaction.py.
+It has been modified from todo2.py. There are new options.
+Most of the summarize by date/category do not work,
+as this implementation style was considered too difficult
+by the two team members investigating this issue.
+Known issues: summarize methods are not implemented. Commented code is kept to show progress.
+Providing unexpected input may cause an error.
 Authors: @Tim Hickey @Jeremy Huey @mengli yang @Ijeoma @Igbogu @Chris Tighe
+@Jeremy Huey did the pylint-ing.
+Version: 1.0
 '''
 
 import sys
-import os
 
-import transaction
+# import transaction
 from transaction import Transaction
 
 def print_usage():
@@ -44,15 +53,17 @@ def print_tactions(tactions):
 def process_args(arglist):
     ''' examine args and make appropriate calls to Transaction'''
     t = Transaction('tracker.db')
-    
+
+    # Quit is added by @Jeremy Huey, but done in the main loop in toplevel()
     if arglist==[]:
         print_usage()
     # ==== Chris
     elif arglist[0]=="modcat":
-        # Assuming that modify means modify category of a transaction (may change if we swap to addtl table for categories)
-        t.modifyCategory(arglist[1],arglist[2])
+        # Assuming that modify means modify category of a transaction
+        # (may change if we swap to addtl table for categories)
+        t.modify_category(arglist[1], arglist[2])
     elif arglist[0]=="showall":
-        print_tactions(t.showTransactions())
+        print_tactions(t.show_transactions())
     elif arglist[0]=="add":
         if len(arglist) != 5:
             # print(arglist)
@@ -60,10 +71,9 @@ def process_args(arglist):
             print_usage()
         else:
             date = arglist[3].split("/")
-            item = {'amount':arglist[1],'category':arglist[2],'day':date[1],'month':date[0],'year':date[2],'desc':arglist[4]}
-
-            t.addTransaction(item)
-
+            item = {'amount':arglist[1],'category':arglist[2],'day':date[1],
+                    'month':date[0],'year':date[2],'desc':arglist[4]}
+            t.add_transaction(item)
     # ==== end Chris
 
     # ==== I and J @Jeremy Huey @Ijeoma Igbogu
@@ -74,7 +84,6 @@ def process_args(arglist):
         #print_tactions(t.sum_by_category())
     elif arglist[0] == "usage":
         print_usage()
-
     # ==== end I and J
 
     # ==== ML
@@ -91,11 +100,11 @@ def process_args(arglist):
         print(arglist,"is not implemented")
         print_usage()
     # ==== end ML
-
+    # end method
 
 def toplevel():
-    ''' read the command args and process them
-    @Jeremy Huey added quit. '''
+    '''read the command args and process them
+    @Jeremy Huey added quit.'''
     if len(sys.argv) == 1:
         # they didn't pass any arguments,
         # so prompt for them in a loop

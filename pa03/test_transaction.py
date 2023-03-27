@@ -17,8 +17,8 @@ cur.execute("SELECT * FROM transactions")
 print(cur.fetchone())
 con.close()
 
-tra.modifyCategory(1, "retail")
-x = tra.showTransactions()
+tra.modify_category(1, "retail")
+x = tra.show_transactions()
 print(x)
 
 
@@ -34,7 +34,7 @@ t = {"amount":23, "category":"food","day":5, "month": 12, "year":2023,"desc":"gr
 t1= {"amount":500, "category":"travel", "day":31, "month": 7, "year":2023,"desc":"hotel"}
 t2= {"amount":6700, "category":"rent", "day":16, "month": 3, "year":2023,"desc":"mortgage"}
 
-x = tra.showTransactions()
+x = tra.show_transactions()
 print(x)
 
 #testing the constructor
@@ -44,9 +44,9 @@ def test_addTransaction():
     :return: boolean
     """
 
-    x = tra.addTransaction(t)
-    x = tra.addTransaction(t1)
-    x = tra.addTransaction(t2)
+    x = tra.add_transaction(t)
+    x = tra.add_transaction(t1)
+    x = tra.add_transaction(t2)
     con = sqlite3.connect('l.db')
     cur = con.cursor()
     cur.execute("SELECT * FROM transactions where amount=23")
@@ -62,7 +62,7 @@ def test_addTransaction():
 
 
 def test_showTransactions():
-    x = tra.showTransactions()
+    x = tra.show_transactions()
     print(x)
     assert x[0] == {'amount': 23,
                          'category text': 'food',
@@ -108,8 +108,8 @@ def test_sum_by_day():
 
 def test_modifyCategory():
 
-    tra.modifyCategory(1, "retail")
-    x = tra.showTransactions()
+    tra.modify_category(1, "retail")
+    x = tra.show_transactions()
     assert x[0] ==   {'amount': 23,
                      'category text': 'retail',
                      'day': 5,
@@ -120,5 +120,5 @@ def test_modifyCategory():
 
 def test_delete_transaction():
     x = tra.delete_transaction(row_id=0)
-    y = tra.showTransactions()
+    y = tra.show_transactions()
     unittest.assertFalsex=(x, y)
