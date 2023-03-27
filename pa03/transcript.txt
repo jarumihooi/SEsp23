@@ -1,0 +1,84 @@
+kay@Zeffi:/mnt/c/Users/J/Documents/Classes/Class+Sp+2023/1_SE/SEsp23/pa03$ python3 tracker.py
+usage:
+            transaction quit
+            transaction modcat item_id new_category - eg. modcat 1 bills
+            transaction showall
+            transaction day
+            transaction month
+            transaction year
+            transaction add amount category mm/dd/yyyy description - eg. add 23 food 03/02/2022 ate food spaces ok
+            transaction delete item_id
+            transaction sumcat
+            transaction usage
+
+command> showall
+item #     amount     category   date                 description
+----------------------------------------
+1          3          bills      8/23/2022            Food for the week
+2          23         food       3/2/2022             ate fofofofofod
+----------------------------------------
+
+command> day
+WARNING: Sum by Category is non-implemented
+----------------------------------------
+
+command> month
+WARNING: Sum by Category is non-implemented
+----------------------------------------
+
+command> year
+WARNING: Sum by Category is non-implemented
+----------------------------------------
+
+command> modcat 1 food
+----------------------------------------
+
+command> showall
+item #     amount     category   date                 description
+----------------------------------------
+1          3          food       8/23/2022            Food for the week
+2          23         food       3/2/2022             ate fofofofofod
+----------------------------------------
+
+command> add 23 food 03/02/2022 ate food spaces ok
+----------------------------------------
+
+command> showall
+item #     amount     category   date                 description
+----------------------------------------
+1          3          food       8/23/2022            Food for the week
+2          23         food       3/2/2022             ate fofofofofod
+3          23         food       3/2/2022             ate food spaces ok
+----------------------------------------
+
+command> delete 3
+----------------------------------------
+
+command> showall
+item #     amount     category   date                 description
+----------------------------------------
+1          3          food       8/23/2022            Food for the week
+2          23         food       3/2/2022             ate fofofofofod
+----------------------------------------
+
+command> sumcat
+WARNING: Sum by Category is non-implemented
+----------------------------------------
+
+command> usage
+usage:
+            transaction quit
+            transaction modcat item_id new_category - eg. modcat 1 bills
+            transaction showall
+            transaction day
+            transaction month
+            transaction year
+            transaction add amount category mm/dd/yyyy description - eg. add 23 food 03/02/2022 ate food spaces ok
+            transaction delete item_id
+            transaction sumcat
+            transaction usage
+
+----------------------------------------
+
+command> quit
+Quitting the transcation shell.

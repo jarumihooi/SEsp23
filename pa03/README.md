@@ -1,5 +1,5 @@
 Describe app ====
-Authors: @Tim Hickey @Jeremy Huey @mengli yang @Ijeoma @Igbogu @Chris Tighe
+Authors: @Tim Hickey @Jeremy Huey @mengli yang @Ijeoma Igbogu @Chris Tighe
 
 This app creates a database locally and then accounts for transactions that
 the user has made in the past (apparently). 
@@ -94,4 +94,4 @@ main.py::test_delete_transaction PASSED                                  [100%]
 Process finished with exit code 0
 
 run tracker.py ====
-transcript of trying things. 
+See transcript.txt 
