@@ -1,23 +1,29 @@
+#!/usr/bin/python3
 '''
 Should be similar to todo2.py - user input gets translated to ORM calls
 '''
 
 import sys
 import os
+
+import transaction
 from transaction import Transaction
 
 def print_usage():
-    ''' print an explanation of how to use this command '''
+    ''' print an explanation of how to use this command
+    @Jeremy Huey edited this to match our '''
+    # transaction.print_menu()
     print('''usage:
-            transaction show
+            transaction quit
+            transaction modcat - do not use. This is depreciated. 
             transaction showall
-            transactions by day
-            transactions by month
-            transactions by year
-            transaction showcomplete
-            transaction add amount category date description
-            transaction complete item_id
+            transaction day
+            transaction month
+            transaction year
+            transaction add amount category mm/dd/yyyy description - eg. add 23 food 03/02/2022 ate food spaces ok
             transaction delete item_id
+            transaction sumcat
+            transaction usage
             '''
             )
 
@@ -48,20 +54,23 @@ def process_args(arglist):
         print_tactions(t.showTransactions())
     elif arglist[0]=="add":
         if len(arglist) != 5:
+            print(arglist)
+            print("ERROR: ")
             print_usage()
         else:
             date = arglist[3].split("/")
             item = {'amount':arglist[1],'category':arglist[2],'day':date[1],'month':date[0],'year':date[2],'desc':arglist[4]}
+
             t.addTransaction(item)
 
     # ==== end Chris
 
     # ==== I
-    elif arglist[0] == "6":
+    elif arglist[0] == "delete":
         print_tactions(t.selectCompleted())
-    elif arglist[0] == "10":
+    elif arglist[0] == "sumcat":
         print_tactions(t.selectCompleted())
-    elif arglist[0] == "11":
+    elif arglist[0] == "usage":
         print_tactions(t.selectCompleted())
 
     # ==== end I
@@ -92,7 +101,7 @@ def toplevel():
             args = input("command> ").split(' ')
             if args[0] == 'add':
                 # join everyting after the amt,category,date as a string
-                args = ['add', args[1], args[2], " ".join(args[3:])]
+                args = ['add', args[1], args[2], args[3], " ".join(args[4:])] #bf: changed.
             elif args[0] == 'quit':
                 quitt = True
                 print("Quitting the transcation shell.")

@@ -1,7 +1,7 @@
 ## test_with_unittest.py
 import unittest
 import sqlite3
-import transactions
+import transaction
 import pandas as pd
 import csv
 
@@ -11,7 +11,7 @@ con = sqlite3.connect('l.db')
 cur = con.cursor()
 
 cur.execute("DROP TABLE IF EXISTS transactions")
-tra = transactions.Transaction("l.db")
+tra = transaction.Transaction("l.db")
 
 cur.execute("SELECT * FROM transactions")
 print(cur.fetchone())

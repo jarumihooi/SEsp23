@@ -11,7 +11,7 @@ def toDict(t):
     '''This method was reformatted with our 5 cols, we can print these dictts.
     t is a tuple (item_num,amount,category,date,description)
     @Jeremy Huey added the starter code.
-    Chris modified this to work with our dictionary structure.
+    @Chris Tighe modified this to work with our dictionary structure.
    '''
     # print('t='+str(t))
     dictt = {'item_num':t[0], 'amount':t[1], 'category text':t[2], 'day':t[3],
@@ -45,7 +45,7 @@ class Transaction():
 
     # ==== end C
 
-    # ==== I
+    # ==== I and J
     def delete_transaction(self, row_id):
         return self.runQuery("DELETE FROM transactions WHERE rowid=(?)", (row_id,))
 
@@ -53,8 +53,10 @@ class Transaction():
         return self.runQuery("SELECT rowid SUM(amount) FROM transactions GROUP BY category",())
 
     def print_menu(self):
-        """
-        1. addTransaction - pass a transaction to insert
+        print("""
+        (Note <> show what to type, do not actually type these in the command request.)
+        To use in bash, run as: $ ./tracker.py <add a command from below here>
+        1. add < - pass a transaction to insert
         2. modifyCategory- use row id, category
         3. showTransactions
         4. delete_transaction - use row id
@@ -62,7 +64,8 @@ class Transaction():
         6. sum_by_date
         7. sum_by_month
         8. sum_by_year
-        """
+        9. quit
+        """)
 
 
     # ==== end I
