@@ -22,24 +22,24 @@ isLoggedIn = (req,res,next) => {
 }
 
 // get the value associated to the key
-router.get('/transaction/',
+router.get('/transaction',
   isLoggedIn,
   async (req, res, next) => {
-      const show = req.query.show
-      // const completed = show=='completed'
-      let items=[]
-      if (show) { // show is completed or todo, so just show some items
-        items = 
-          await TransactionItem.find({userId:req.user._id}) // removed ,completed
-                        // .sort({completed:1,priority:1,createdAt:1})
-      }else {  // show is null, so show all of the items
-        items = 
-          await TransactionItem.find({userId:req.user._id})
-                        // .sort({completed:1,priority:1,createdAt:1})
+      // const show = req.query.show
+      // // const completed = show=='completed'
+      // let items=[]
+      // if (show) { // show is completed or todo, so just show some items
+      //   items = 
+      //     await TransactionItem.find({userId:req.user._id}) // removed ,completed
+      //                   // .sort({completed:1,priority:1,createdAt:1})
+      // }else {  // show is null, so show all of the items
+      //   items = 
+      //     await TransactionItem.find({userId:req.user._id})
+      //                   // .sort({completed:1,priority:1,createdAt:1})
 
-      }
-            res.render('transactionList',{items,show});//removed ,completed
-});
+      // }
+            res.render('transaction',);//removed ,completed
+});//changed from transacitonList
 
 
 
