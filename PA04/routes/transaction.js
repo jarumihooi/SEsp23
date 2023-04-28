@@ -1,9 +1,9 @@
 /*
-  todo.js -- Router for the ToDoList
+  transaction.js -- Router for the Transac app
 */
 const express = require('express');
 const router = express.Router();
-const ToDoItem = require('../models/ToDoItem')
+const TransactionItem = require('../models/Transaction')//renamed
 const User = require('../models/User')
 
 
@@ -22,28 +22,29 @@ isLoggedIn = (req,res,next) => {
 }
 
 // get the value associated to the key
-router.get('/todo/',
+router.get('/transaction/',
   isLoggedIn,
   async (req, res, next) => {
       const show = req.query.show
-      const completed = show=='completed'
+      // const completed = show=='completed'
       let items=[]
       if (show) { // show is completed or todo, so just show some items
         items = 
-          await ToDoItem.find({userId:req.user._id, completed})
-                        .sort({completed:1,priority:1,createdAt:1})
+          await TransactionItem.find({userId:req.user._id}) // removed ,completed
+                        // .sort({completed:1,priority:1,createdAt:1})
       }else {  // show is null, so show all of the items
         items = 
-          await ToDoItem.find({userId:req.user._id})
-                        .sort({completed:1,priority:1,createdAt:1})
+          await TransactionItem.find({userId:req.user._id})
+                        // .sort({completed:1,priority:1,createdAt:1})
 
       }
-            res.render('toDoList',{items,show,completed});
+            res.render('transactionList',{items,show});//removed ,completed
 });
 
 
 
-/* add the value in the body to the list associated to the key */
+/* add the value in the body to the list associated to the key 
+Post would create a new transaction item*/
 router.post('/todo',
   isLoggedIn,
   async (req, res, next) => {
