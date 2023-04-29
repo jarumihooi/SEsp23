@@ -25,6 +25,7 @@ isLoggedIn = (req,res,next) => {
 router.get('/transaction',
   isLoggedIn,
   async (req, res, next) => {
+    
       // const show = req.query.show
       // // const completed = show=='completed'
       // let items=[]
@@ -38,26 +39,34 @@ router.get('/transaction',
       //                   // .sort({completed:1,priority:1,createdAt:1})
 
       // }
-            res.render('transaction',);//removed ,completed
+            res.render('transaction');//removed ,{items,show} ,completed
 });//changed from transacitonList
 
 
 
 /* add the value in the body to the list associated to the key 
 Post would create a new transaction item*/
-router.post('/todo',
+router.post('/transaction',
   isLoggedIn,
   async (req, res, next) => {
-      const todo = new ToDoItem(
-        {item:req.body.item,
-         createdAt: new Date(),
-         completed: false,
-         priority: parseInt(req.body.priority),
-         userId: req.user._id
+      const transac = new TransactionItem(
+        {description: req.body.description,
+         amount: req.body.amount,
+         category: req.body.category,
+         date: new Date(),
+         userId: req.user._id //this one doesnt need ,stuf . it knows 
         })
-      await todo.save();
-      res.redirect('/todo')
+      await transac.save();//save the item
+      res.redirect('/transaction')//it'll now go back to same page. 
 });
+//req.body somewhere in the form is an item question. 
+/*
+description: String,
+  amount: Number,
+  category: String,
+  date: Date,
+  userId: {type:ObjectId, ref:'user' }
+*/
 
 router.get('/todo/remove/:itemId',
   isLoggedIn,
