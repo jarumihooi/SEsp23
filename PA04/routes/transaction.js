@@ -3,7 +3,7 @@
 */
 const express = require('express');
 const router = express.Router();
-const TransactionItem = require('../models/Transaction')//renamed
+const TransactionItem = require('../models/TransactionItem')//renamed
 const User = require('../models/User')
 
 
@@ -25,21 +25,22 @@ isLoggedIn = (req,res,next) => {
 router.get('/transaction',
   isLoggedIn,
   async (req, res, next) => {
-    
-      // const show = req.query.show
-      // // const completed = show=='completed'
-      // let items=[]
-      // if (show) { // show is completed or todo, so just show some items
-      //   items = 
-      //     await TransactionItem.find({userId:req.user._id}) // removed ,completed
-      //                   // .sort({completed:1,priority:1,createdAt:1})
-      // }else {  // show is null, so show all of the items
-      //   items = 
-      //     await TransactionItem.find({userId:req.user._id})
-      //                   // .sort({completed:1,priority:1,createdAt:1})
+    // const show = req.query.show
+    const sortBy = req.query.sortBy
+    const amount = sortBy == 'amount'
 
-      // }
-            res.render('transaction');//removed ,{items,show} ,completed
+      
+      let items=[]
+      if (sortBy=="amount") { // show is completed or todo, so just show some items
+      res.locals.items = await TransactionItem.find({userId:req.user._id}).sort({amount:1}) // removed ,completed
+    
+
+     } else {
+     res.locals.items = await TransactionItem.find({userId:req.user._id})
+
+
+     }
+            res.render('transactionList');//removed ,{items,show} ,completed
 });//changed from transacitonList
 
 
@@ -51,144 +52,59 @@ router.post('/transaction',
   async (req, res, next) => {
       const transac = new TransactionItem(
         {description: req.body.description,
-         amount: req.body.amount,
+          // for some reason amount is being stored in category
+         amount: parseInt(req.body.amount),
          category: req.body.category,
-         date: new Date(),
+         date: req.body.date,
          userId: req.user._id //this one doesnt need ,stuf . it knows 
         })
       await transac.save();//save the item
       res.redirect('/transaction')//it'll now go back to same page. 
 });
-//req.body somewhere in the form is an item question. 
-/*
-description: String,
-  amount: Number,
-  category: String,
-  date: Date,
-  userId: {type:ObjectId, ref:'user' }
-*/
 
-router.get('/todo/remove/:itemId',
+//remove
+router.get('/transaction/remove/:itemId',
   isLoggedIn,
   async (req, res, next) => {
-      console.log("inside /todo/remove/:itemId")
-      await ToDoItem.deleteOne({_id:req.params.itemId});
-      res.redirect('/toDo')
+      console.log("inside /transaction/remove/:itemId")
+      await TransactionItem.deleteOne({_id:req.params.itemId});
+      res.redirect('/transaction')
 });
 
-router.get('/todo/complete/:itemId',
-  isLoggedIn,
-  async (req, res, next) => {
-      console.log("inside /todo/complete/:itemId")
-      await ToDoItem.findOneAndUpdate(
-        {_id:req.params.itemId},
-        {$set: {completed:true}} );
-      res.redirect('/toDo')
-});
 
-router.get('/todo/uncomplete/:itemId',
-  isLoggedIn,
-  async (req, res, next) => {
-      console.log("inside /todo/complete/:itemId")
-      await ToDoItem.findOneAndUpdate(
-        {_id:req.params.itemId},
-        {$set: {completed:false}} );
-      res.redirect('/toDo')
-});
 
-router.get('/todo/edit/:itemId',
+//we want to find one and prefill the form so the user can edit
+router.get('/transaction/transactionEdit/:itemId',
   isLoggedIn,
   async (req, res, next) => {
-      console.log("inside /todo/edit/:itemId")
-      const item = 
-       await ToDoItem.findById(req.params.itemId);
-      //res.render('edit', { item });
+      console.log("inside /transaction/transactionEdit/:itemId")
+      const item = await TransactionItem.findById(req.params.itemId);
+      // res.json(item); //sending item as json object but we want to send to edit page
       res.locals.item = item
-      res.render('edit')
-      //res.json(item)
+      res.render('transactionEdit')
+      //this is another way to send it
+      // res.locals.item = item
+      // res.render('edit')
+
 });
 
-router.post('/todo/updateTodoItem',
+router.post('/transaction/updateTransactionItem',
   isLoggedIn,
   async (req, res, next) => {
-      const {itemId,item,priority} = req.body;
-      console.log("inside /todo/complete/:itemId");
-      await ToDoItem.findOneAndUpdate(
+      const {itemId,item,amount,category,date} = req.body;
+      //const itemId = req.body.itemID
+      //const item = req.body.item
+      //const itemId = req.body.priority
+      console.log("inside /transaction/:itemId");
+      await TransactionItem.findOneAndUpdate(
         {_id:itemId},
-        {$set: {item,priority}} );
-      res.redirect('/toDo')
+        {$set: {item,amount,category,date}});
+      res.redirect('/transaction')
 });
 
-router.get('/todo/byUser',
-  isLoggedIn,
-  async (req, res, next) => {
-      let results =
-            await ToDoItem.aggregate(
-                [ 
-                  {$group:{
-                    _id:'$userId',
-                    total:{$count:{}}
-                    }},
-                  {$sort:{total:-1}},              
-                ])
-              
-        results = 
-           await User.populate(results,
-                   {path:'_id',
-                   select:['username','age']})
 
-        //res.json(results)
-        res.render('summarizeByUser',{results})
-//      populate by username and age.
-});
 
-router.get('/todo/byUserCompleted',
-  isLoggedIn,
-  async (req, res, next) => {
-      let results =
-            await ToDoItem.aggregate(
-                [
-                  {$match:{
-                    'completed':true}},
-                    {$group:{
-                        _id:'$userId',
-                            total:{$count:{}}
-                        }},
-                  {$sort:{total:-1}},
-                ])
 
-        results =
-           await User.populate(results,
-                   {path:'_id',
-                   select:['username','age']})
-
-        //res.json(results)
-        res.render('summarizeByUser',{results})
-});
-
-router.get('/todo/byItemName',
-  isLoggedIn,
-  async (req, res, next) => {
-      let results =
-            await ToDoItem.aggregate(
-                [
-                  {$match:{
-                    'completed':true}},
-                    {$group:{
-                        _id:'$item',
-                            count:{$sum:1}
-                        }},
-                  {$sort:{total:-1}},
-                ])
-
-        results =
-           await User.populate(results,
-                   {path:'_id',
-                   select:['username','age']})
-
-        //res.json(results)
-        res.render('summarizeByUser',{results})
-});
 
 
 module.exports = router;
