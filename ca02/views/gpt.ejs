@@ -1,0 +1,52 @@
+<h1> GPT App for <%= user.username %> </h1>
+<div class="row">
+  <div class="col">
+    <p> GPT Description! </p>
+  </div>
+</div>
+<form method="post" action="gpt">
+  new resume: <input type="text" name="resume">
+  <br>
+  new person_desc: <input type="text" name="person_desc">
+  <br>
+  new jobpost: <input type="text" name="jobpost">
+  <br>
+  new response: <input type="text" name="response">
+  <br>
+  new remade_resume: <input type="text" name="remade_resume">
+  <br>
+  <input type="submit" value="store">
+</form>
+
+<h2>GPT Items</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Resume</th>
+      <th>Person Desc</th>
+      <th>Job Post</th>
+      <th>Response</th>
+      <th>Remade Resume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.forEach(item => { %>
+      <tr>
+        <td><%= item.resume %></td>
+        <td><%= item.person_desc %></td>
+        <td><%= item.jobpost %></td>
+        <td><%= item.response %></td>
+        <td><%= item.remade_resume %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+
+<h2>Delete Item</h2>
+<form method="post" action="/gpt/delete">
+  
+  person_desc to delete: <input type="text" name="person_desc">
+  <br>
+  <input type="submit" value="Delete">
+</form>
