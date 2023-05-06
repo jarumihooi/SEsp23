@@ -1,0 +1,47 @@
+<div>
+
+    <h1> Transaction App for <%= user.username %> </h1>
+    <p> Here are your transactions!</p>
+
+    <td style="text-align: center"><a class="btn btn-lg btn-primary" href="/transaction"> transaction list</a></td>
+
+    </table>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">category</th>
+          <th scope="col">amount</th>
+        </tr>
+      </thead>
+  
+    <% var num = 1%>
+    <% var c = ""%>
+    <% items.forEach(item => { %>
+   
+      <tbody>
+        <% if (num%2 ==1) {c="#F0F0F0"} else {c="#FFFFFF"} %>
+  
+        <tr bgcolor= <%=c %>>
+          <th scope="row"> <%= item.description %></th>
+          <td><%= item.amount %></td>
+          
+  
+          </tr>
+          <% num++ %>
+  
+  
+  
+          
+      </tbody>
+    
+       
+      
+        <% }) %>
+  
+  
+  
+  
+       
+  
+          
+        </table>
