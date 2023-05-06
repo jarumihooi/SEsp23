@@ -1,0 +1,49 @@
+This problem tests your understanding of how to use basic git commands in bash....
+
+1. Write the shell commands you need to clone your team repository to your Desktop (use your actual team repository URL)
+git clone https://github.com/jarumihooi/SEsp23.git
+
+2. Suppose you made some changes to the repository (adding a file profile_USERNAME.py for example) where USERNAME is your github username.
+Give the commands you would need to do to push the changes you made  to the file profile_USERNAM.py (and nothing else) back to the github repository.
+You can assume that no one has pushed since you cloned the repository.
+git add profile_j.py
+git commit -m "added profile_j.py"
+git pull
+git push
+
+
+4. Suppose you have cloned down the main branch of a git repository  and have made several changes to the files
+data1.csv and data2.csv and analyze1.py and analyze.py   Write the git commands to make 2 commits.
+git add data1.csv data2.csv
+git commit -m "cleaned the data headers"
+git pull
+git push
+
+git add analyze1.py analyze.py
+git commit -m "modified to use new data headers"
+git pull
+git push
+
+The first commits the changes to the csv files with message "cleaned the data headers"
+The second commits the changes to the .py files with the message "modified to use new data headers"
+Write the git commands to
+a. fetch all of the lastest branches from the remote repository
+b. print all of the branches
+c. checkout the L20 branch
+d. create a new branch off of L20 called L20-myedits
+git fetch -all
+git pull -all
+git branch -r
+git checkout L20 //-b to create.
+git checkout -b L20-myedits
+git branch //to check
+
+5. Suppose you've made some changes, to L20-myedits,
+write the github shell commands to
+a. add your changes to the staging area
+b. commit them with the message "my own work"
+c. checkout the original L20 branch again
+
+git add .
+git commit -m "my own work"
+git checkout L20
