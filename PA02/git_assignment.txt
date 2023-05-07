@@ -33,7 +33,7 @@ c. checkout the L20 branch
 d. create a new branch off of L20 called L20-myedits
 git fetch -all
 git pull -all
-git branch -r
+git branch -a // -r for remote
 git checkout L20 //-b to create.
 git checkout -b L20-myedits
 git branch //to check
